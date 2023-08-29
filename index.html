@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binary Breakdowns</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <input type="text" id="myInput" oninput="updateBinary(this.value)" autofocus>
+    <p id="binary_code"></p>
+
+
+    <button id="loopButton" onclick="playLoop()" class="active">Play Loop</button>
+    <button id="oneShotButton" onclick="playOneShot()">Play One Shot</button>
+    <button onclick="stopAudio()">Stop Audio</button>
+
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>

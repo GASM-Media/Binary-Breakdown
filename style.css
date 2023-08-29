@@ -1,0 +1,10 @@
+.current {
+    background-color: black;
+    color: white;
+}
+
+/* Add appropriate styling for the active button */
+.active {
+    background-color: #007bff;
+    color: white;
+}
