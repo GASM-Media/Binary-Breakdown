@@ -10,13 +10,25 @@
 </head>
 
 <body>
+
+    <h1>b1nary breakd0wn</h1>
     <input type="text" id="myInput" oninput="updateBinary(this.value)" autofocus>
-    <p id="binary_code"></p>
+    <span id="binary_code"></span>
 
+    <div id="modeSelectors">
+        <button id="loopButton" onclick="playLoop()" class="active">Play Loop</button>
+        <button id="oneShotButton" onclick="playOneShot()">Play One Shot</button>
+        <button id="stopAudioButton" onclick="stopAudio()">Stop Audio</button>
+        <div class="color-picker-container">
+            <label class="color-picker-label">Color for 0:</label>
+            <input type="color" id="color0Picker" class="color-picker" value="#FFFFFF">
+        </div>
+        <div class="color-picker-container">
+            <label class="color-picker-label">Color for 1:</label>
+            <input type="color" id="color1Picker" class="color-picker" value="#000000">
+        </div>
 
-    <button id="loopButton" onclick="playLoop()" class="active">Play Loop</button>
-    <button id="oneShotButton" onclick="playOneShot()">Play One Shot</button>
-    <button onclick="stopAudio()">Stop Audio</button>
+    </div>
 
 
     <script src="main.js"></script>
