@@ -1,10 +1,196 @@
 .current {
     background-color: black;
-    color: white;
+    color: rgb(232, 11, 70);
 }
 
 /* Add appropriate styling for the active button */
 .active {
-    background-color: #007bff;
+    background-color: rgb(232, 11, 70) !important;
     color: white;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* background-color: black; */
+}
+
+
+
+#binary_code {
+    max-width: 100%;
+    word-wrap: break-word;
+    padding: 10px;
+    color: white;
+}
+
+#myInput {
+    text-align: center;
+    /* Center the text horizontally */
+}
+
+
+#modeSelectors>* {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Apply padding to all elements within "modeSelectors" */
+#modeSelectors>* {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Sophisticated Button Style */
+#modeSelectors button {
+    background-color: #34495e;
+    color: #ffffff;
+    border: 2px solid #2c3e50;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+#modeSelectors button:hover {
+    background-color: #2c3e50;
+    border-color: #34495e;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(232, 11, 70, 0.6), 0 0 20px rgba(232, 11, 70, 0.6), 0 0 30px rgba(232, 11, 70, 0.6);
+    }
+
+    50% {
+        text-shadow: 0 0 5px rgba(232, 11, 70, 0.3), 0 0 10px rgba(232, 11, 70, 0.3), 0 0 15px rgba(232, 11, 70, 0.3);
+    }
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: rgb(232, 11, 70);
+    animation: pulse 4s infinite;
+}
+
+.current {
+    background-color: black;
+    color: rgb(232, 11, 70);
+}
+
+/* Add appropriate styling for the active button */
+.active {
+    background-color: rgb(232, 11, 70) !important;
+    color: white;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: black;
+}
+
+
+
+#binary_code {
+    max-width: 100%;
+    word-wrap: break-word;
+    padding: 10px;
+    color: white;
+}
+
+#myInput {
+    text-align: center;
+    /* Center the text horizontally */
+}
+
+
+#modeSelectors>* {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Apply padding to all elements within "modeSelectors" */
+#modeSelectors>* {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* Sophisticated Button Style */
+#modeSelectors button {
+    background-color: #34495e;
+    color: #ffffff;
+    border: 2px solid #2c3e50;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+#modeSelectors button:hover {
+    background-color: #2c3e50;
+    border-color: #34495e;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        text-shadow: 0 0 10px rgba(232, 11, 70, 0.6), 0 0 20px rgba(232, 11, 70, 0.6), 0 0 30px rgba(232, 11, 70, 0.6);
+    }
+
+    50% {
+        text-shadow: 0 0 5px rgba(232, 11, 70, 0.3), 0 0 10px rgba(232, 11, 70, 0.3), 0 0 15px rgba(232, 11, 70, 0.3);
+    }
+}
+
+h1 {
+    text-align: center;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    color: rgb(232, 11, 70);
+    animation: pulse 4s infinite;
+}
+
+@keyframes fadeBackground {
+    0% {
+        background-color: white;
+    }
+
+    100% {
+        background-color: black;
+    }
+}
+
+body.fade-animation {
+    animation: fadeBackground 0.1s ease-in-out;
+}
+
+.color-picker-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.color-picker-label {
+    margin-right: 10px;
+}
+
+.color-picker {
+    width: 30px;
+    height: 30px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
 }

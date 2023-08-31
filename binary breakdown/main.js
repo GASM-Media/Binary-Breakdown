@@ -4,6 +4,21 @@ let playmode = {
   loop: true,
 };
 
+// TO IMPLEMENT:
+// playback selection details
+// let playback = {
+//   currentMode: "normal_playback",
+//   modes: ["normal_playback", "delay_Playback", "delay_playback_random"],
+//   delay_time_ms: 500,
+//   delay_playback_random_range_ms: 100,
+// };
+
+// sample selection
+// current sample
+// currently selected samples
+// available samples
+// unlocked samples
+
 let audioState = {
   binary: "",
   audioIndex: 0,
@@ -22,17 +37,6 @@ function textToBinary(text) {
   return binary; // Return the binary string
 }
 
-function stopAudio() {
-  audioElements.forEach((audio) => {
-    audio.pause();
-    audio.currentTime = 0;
-    audio.onended = null;
-  });
-  audioElements = [];
-  audioState.audioIndex = 0; // Reset audio index
-  audioState.currentIndex = -1; // Reset current index
-}
-
 const audioPlaybackDelay = 500; // Adjust this value to control the playback speed (in milliseconds)
 
 function playNextAudio() {
@@ -41,12 +45,16 @@ function playNextAudio() {
     audioState.audioIndex = 0; // Reset index for loop mode
   }
 
-  if (audioState.audioIndex < binary.length) {
-    let audio = new Audio(
-      binary[audioState.audioIndex] === "0" ? "./Media/0.mp3" : "./Media/1.mp3"
-    );
+  if (playmode.oneShot && audioState.audioIndex >= binary.length) {
+    stopAudio();
+    audio.pause();
+  }
 
-    console.log("Playing audio:", audio.src);
+  if (audioState.audioIndex < binary.length) {
+    const audioValue = binary[audioState.audioIndex];
+    let audio = new Audio(
+      audioValue === "0" ? "./Media/1a.mp3" : "./Media/1b.mp3"
+    );
 
     audioElements.push(audio);
 
@@ -68,6 +76,19 @@ function playNextAudio() {
       if (indexToRemove !== -1) {
         audioElements.splice(indexToRemove, 1);
       }
+
+      // Determine the background color based on the audio value
+      const backgroundColor =
+        audioValue === "0"
+          ? document.getElementById("color0Picker").value
+          : document.getElementById("color1Picker").value;
+      document.body.style.backgroundColor = backgroundColor;
+      document.body.classList.add("fade-animation");
+
+      setTimeout(() => {
+        document.body.classList.remove("fade-animation");
+        document.body.style.backgroundColor = ""; // Reset background color
+      }, 500); // Remove the class after the animation duration (0.5 seconds)
     };
 
     audio.play().catch((error) => {
@@ -84,7 +105,6 @@ function playNextAudio() {
 function updateBinary(text) {
   audioState.binary = textToBinary(text); // Update the binary string
   if (playmode.loop) {
-    stopAudio(); // Stop any ongoing audio before starting new playback
     playNextAudio(); // Play with the updated binary value
   }
   updateHighlight(); // Update the highlighting immediately
@@ -107,26 +127,84 @@ function updateHighlightLoop() {
 
 requestAnimationFrame(updateHighlightLoop);
 
+// function stopAudio() {
+//   updateButtonStyles();
+//   audioElements.forEach((audio) => {
+//     audio.pause();
+//     audio.currentTime = 0;
+//     audio.onended = null;
+//   });
+//   audioElements = [];
+//   audioState.audioIndex = 0; // Reset audio index
+//   audioState.currentIndex = -1; // Reset current index
+
+//   // Add the "active" class to the stopAudioButton
+//   // document.getElementById("stopAudioButton").classList.add("active");
+// }
+
+// function playLoop() {
+//   playmode.loop = true;
+//   playmode.oneShot = false;
+//   updateBinary(document.getElementById("myInput").value);
+//   updateButtonStyles();
+// }
+
+// function playOneShot() {
+//   playmode.oneShot = true;
+//   playmode.loop = false;
+//   updateBinary(document.getElementById("myInput").value);
+//   updateButtonStyles();
+// }
+
+// function updateButtonStyles() {
+//   const loopButton = document.getElementById("loopButton");
+//   const oneShotButton = document.getElementById("oneShotButton");
+//   const stopAudioButton = document.getElementById("stopAudioButton");
+
+//   loopButton.classList.toggle("active", playmode.loop);
+//   oneShotButton.classList.toggle("active", playmode.oneShot);
+//   stopAudioButton.classList.toggle("active", audioElements.length > 0);
+// }
+
 function playLoop() {
   playmode.loop = true;
   playmode.oneShot = false;
   updateBinary(document.getElementById("myInput").value);
-  updateButtonStyles();
+  updateButtonStyles("loopButton");
 }
 
 function playOneShot() {
   playmode.oneShot = true;
   playmode.loop = false;
   updateBinary(document.getElementById("myInput").value);
-  updateButtonStyles();
+  updateButtonStyles("oneShotButton");
 }
 
-function updateButtonStyles() {
+function stopAudio() {
+  if (audioElements.length > 0) {
+    updateButtonStyles("stopAudioButton");
+    audioElements.forEach((audio) => {
+      audio.pause();
+      audio.currentTime = 0;
+      audio.onended = null;
+    });
+    audioElements = [];
+    audioState.audioIndex = 0; // Reset audio index
+    audioState.currentIndex = -1; // Reset current index
+  }
+}
+
+function updateButtonStyles(activeButtonId) {
   const loopButton = document.getElementById("loopButton");
   const oneShotButton = document.getElementById("oneShotButton");
+  const stopAudioButton = document.getElementById("stopAudioButton");
 
-  loopButton.classList.toggle("active", playmode.loop);
-  oneShotButton.classList.toggle("active", playmode.oneShot);
+  loopButton.classList.toggle("active", loopButton.id === activeButtonId);
+  oneShotButton.classList.toggle("active", oneShotButton.id === activeButtonId);
+  stopAudioButton.classList.toggle(
+    "active",
+    stopAudioButton.id === activeButtonId
+  );
 }
 
 // Programmatically create HTML highlighting current position in the binary string
